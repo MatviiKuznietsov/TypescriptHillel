@@ -2,6 +2,8 @@ type LecturerContacts = {
     email: string;
     phone?: string;
 };
+type DirectionName = 'Frontend' | 'Backend' | 'QA';
+type LevelName = 'Junior' | 'Middle' | 'Senior';
 
 enum GroupStatus {
     Open = 'open',
@@ -111,10 +113,10 @@ class Group {
 
     private _status: GroupStatus = GroupStatus.Open;
     private _students: Student[] = []; // Modify the array so that it has a valid toSorted method*
-    private _directionName: string;
-    private _levelName: string;
+    private _directionName: DirectionName;
+    private _levelName: LevelName;
 
-    constructor(directionName: string, levelName: string) {
+    constructor(directionName: DirectionName, levelName: LevelName) {
         this._directionName = directionName;
         this._levelName = levelName;
     }
@@ -131,11 +133,11 @@ class Group {
         return this._students;
     }
 
-    get directionName(): string {
+    get directionName(): DirectionName {
         return this._directionName;
     }
 
-    get levelName(): string {
+    get levelName(): LevelName {
         return this._levelName;
     }
 
