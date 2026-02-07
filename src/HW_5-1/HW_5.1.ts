@@ -3,23 +3,15 @@
 У кожної фігури є загальнодоступні властивості - колір і назва, які не можна змінювати після створення.
 У Square і Rectangle зі свого боку є ще додатковий метод print, який виводить рядок із формулою розрахунку площі */
 
-class Shape {
-    private _name: string;
-    private _color: string;
+/*Shape - це щось чого реально не існує
+Я не бачу обовʼязку мати calculateArea
+RectangleBase також не може мати інстансів*/
 
-    constructor(name: string, color: string) {
-        this._name = name;
-        this._color = color;
-    }
+abstract class Shape {
 
+    protected constructor(public readonly name: string, public readonly color: string) {}
 
-    get name(): string {
-        return this._name;
-    }
-
-    get color(): string {
-        return this._color;
-    }
+    abstract calculateArea(): number;
 }
 
 type FormulaMap = {
@@ -27,26 +19,23 @@ type FormulaMap = {
     square: 'S = a²';
 };
 
-class RectangleBase extends Shape {
+abstract class RectangleBase extends Shape {
     protected readonly _formula: FormulaMap = {
         rectangle: 'S = a * b',
         square: 'S = a²'
     };
-    private _sideA: number;
-    private _sideB: number;
 
-    constructor(name: string, color: string, sideA: number, sideB: number) {
+    protected readonly sideA: number;
+    protected readonly sideB: number;
+
+    protected constructor(name: string, color: string, sideA: number, sideB: number) {
         super(name, color);
-        this._sideA = sideA;
-        this._sideB = sideB;
+        this.sideA = sideA;
+        this.sideB = sideB;
     }
 
     get formula(): FormulaMap {
         return this._formula;
-    }
-
-    calculateArea(): number {
-        return this._sideA * this._sideB;
     }
 }
 
@@ -60,6 +49,10 @@ class Rectangle extends RectangleBase {
     print() {
         console.log(this.formula.rectangle);
     }
+
+    calculateArea(): number {
+        return this.sideA*this.sideB;
+    }
 }
 
 class Square extends RectangleBase {
@@ -70,6 +63,10 @@ class Square extends RectangleBase {
 
     print() {
         console.log(this.formula.square);
+    }
+
+    calculateArea(): number {
+        return this.sideA*this.sideA;
     }
 }
 
