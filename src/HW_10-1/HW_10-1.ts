@@ -3,6 +3,7 @@
 // Вам потрібно створити тип UpperCaseKeys, який буде приводити всі ключі до верхнього регістру.
 // І саме цікаве. Створіть тип ObjectToPropertyDescriptor, який перетворює звичайний обʼєкт на обʼєкт де кожне value є дескриптором.
 
+
 type DeepReadonly<T> =
     T extends (...args: any[]) => any
         ? T
